@@ -17,5 +17,21 @@ public class LoginPage {
 		element = driver.findElement(By.xpath("//*[@id=\"md-input-3\"]"));
 		return element;
 	}
+	
+	public static WebElement LogInButton(WebDriver driver) {
+		element = driver.findElement(By.xpath("/html/body/app-root/div/div[2]/ng-component/div/button/span"));
+		return element;
+	}
+
+	public static WebElement LogOutButton(WebDriver driver) {
+		element = driver.findElement(By.xpath("/html/body/app-root/div/div[1]/app-menu/md-toolbar/div/md-toolbar-row/button[3]/span"));
+		return element;
+	}
+	
+	public static WebElement ErrorMessage(WebDriver driver) {
+		//element = driver.findElement(By.cssSelector("body>app-root>div>div.app-content>ng-component>div>div>span"));
+		element = driver.findElement(By.cssSelector("body>app-root>div>div.app-content>ng-component>div>div>span"));
+		return element;
+	}
 
 }

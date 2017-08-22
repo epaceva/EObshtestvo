@@ -1,4 +1,4 @@
-package RegressionTests.RegressionTests;
+package RegressionTests;
 
 import java.util.concurrent.TimeUnit;
 
@@ -7,29 +7,23 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import testData.Constant;
 import junit.framework.Assert;
 import pageModels.LoginModel;
-import pageObjects.HomePage;
-
+import pageObjects.LoginPage;
 import testData.ExcelUtils;
 
-public class Login {
+public class LoginTest {
 
 	private static WebDriver driver;
-	private WebDriverWait wait;
 
 	@Before
 
 	public void setUp() throws Exception {
 
 		System.setProperty("webdriver.chrome.driver", "D:\\Documents\\SeleniumDriver\\chromedriver.exe");
-		/*
-		 * System.setProperty("webdriver.chrome.logfile",
-		 * "D:\\Documents\\SeleniumDriver\\chromedriver.log");
-		 * System.setProperty("webdriver.chrome.verboseLogging", "true");
-		 */
+		System.setProperty("webdriver.chrome.logfile", "D:\\Documents\\SeleniumDriver\\chromedriver.log");
+		System.setProperty("webdriver.chrome.verboseLogging", "true");
 
 		this.driver = new ChromeDriver();
 		this.driver.manage().window().maximize();
@@ -44,13 +38,28 @@ public class Login {
 	@Test
 	public void SuccessfulLogin() throws Exception {
 
-		LoginModel.Execute(driver);
+		LoginModel.AdminLogin(driver);
 
-		Assert.assertEquals("settings_powerLogout", HomePage.AdminAccount_LogOut(driver).getText());
+		Assert.assertEquals("settings_powerLogout", LoginPage.LogOutButton(driver).getText());
 
 		ExcelUtils.setCellData("Pass", 1, 3);
 
-		HomePage.AdminAccount_LogOut(driver).click();
+		LoginPage.LogOutButton(driver).click();
+
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void ErrorMessageLogin() throws Exception {
+
+		LoginModel.IncorrectUserLogin(driver);
+		
+		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+
+		Assert.assertEquals("Wrong username or password.", LoginPage.ErrorMessage(driver).getAttribute("class"));
+
+		ExcelUtils.setCellData("Pass", 2, 3);
+
 
 	}
 

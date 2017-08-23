@@ -47,19 +47,35 @@ public class LoginTest {
 		LoginPage.LogOutButton(driver).click();
 
 	}
-	
+
 	@SuppressWarnings("deprecation")
+
 	@Test
-	public void ErrorMessageLogin() throws Exception {
+	public void ErrorMessageLoginWithIncorrectUser() throws Exception {
 
 		LoginModel.IncorrectUserLogin(driver);
-		
+
 		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
 
-		Assert.assertEquals("Wrong username or password.", LoginPage.ErrorMessage(driver).getAttribute("class"));
-
+		// Assert.assertEquals("Wrong username or
+		// password.",LoginPage.ErrorMessage(driver).getAttribute("_ngcontent-c6"));
+		Assert.assertEquals("error", LoginPage.ErrorMessage(driver));
 		ExcelUtils.setCellData("Pass", 2, 3);
 
+	}
+
+	@SuppressWarnings("deprecation")
+	@Test
+	public void ErrorMessageLoginWithIncorrectPassword() throws Exception {
+
+		LoginModel.IncorrectPassLogin(driver);
+
+		driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
+
+		// Assert.assertEquals("Wrong username or password.",
+		// LoginPage.ErrorMessage(driver).getAttribute("_ngcontent-c6"));
+		Assert.assertEquals("error", LoginPage.ErrorMessage(driver));
+		ExcelUtils.setCellData("Pass", 3, 3);
 
 	}
 

@@ -28,10 +28,9 @@ public class LoginPage {
 		return element;
 	}
 	
-	public static WebElement ErrorMessage(WebDriver driver) {
-		//element = driver.findElement(By.cssSelector("body>app-root>div>div.app-content>ng-component>div>div>span"));
-		element = driver.findElement(By.cssSelector("body>app-root>div>div.app-content>ng-component>div>div>span"));
-		return element;
+	public static String ErrorMessage(WebDriver driver) {
+		element = driver.findElement(By.xpath("/html/body/app-root/div/div[2]/ng-component/div/div"));
+		return element.getAttribute("class");
 	}
 
 }

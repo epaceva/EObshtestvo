@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import junit.framework.Assert;
 import pageModels.LoginModel;
+import pageObjects.AdminPage;
 import pageObjects.LoginPage;
 import pageObjects.MenuPage;
 import testData.Constant;
